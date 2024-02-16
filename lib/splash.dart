@@ -1,7 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-// import 'package:healthlog/homescreen.dart';
-import 'login.dart';
+// import 'package:healthlog/home_screen.dart';
+import 'registrationScreens/login.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

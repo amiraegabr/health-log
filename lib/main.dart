@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:healthlog/nav_menu.dart';
-import 'login.dart';
+import 'package:healthlog/home_screen.dart';
+import 'package:healthlog/registrationScreens/login.dart';
+import 'package:healthlog/gnavmenu.dart';
+import 'package:healthlog/onboardingScreens/onboarding.dart';
+import 'package:healthlog/reminders/reminders.dart';
+import 'package:healthlog/reminders/calender.dart';
+import 'themes.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(const App());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: Color(0x129A7F)
-        ),
-        useMaterial3: true,
+      // title: '',
+      theme: AppTheme.lightTheme,
+      home: const SafeArea(
+        bottom: false,
+          child: Login(),
       ),
-      home:  nav_menu(),
     );
   }
 }
