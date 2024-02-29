@@ -7,11 +7,10 @@ class AppTheme {
     useMaterial3: true,
     primaryColor: const Color(0xFF129A7F),
     splashColor: const Color(0xFFFFA873),
-    cardColor: Color(0xFFB1DDD5),
+    cardColor: const Color(0xFFB1DDD5),
 
     // FFA873
 
-    scaffoldBackgroundColor: Color(0xFFB1DDD5),
     textTheme: TextTheme(
       // headlines
       displayLarge:

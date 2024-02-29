@@ -13,10 +13,11 @@ class _MedicationsPageState extends State<MedicationsPage> {
 
   bool? status = false;
 
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Calendar(),
+        const Calendar(),
         Padding(
           padding: const EdgeInsets.all(15),
           child: Container(

@@ -13,8 +13,9 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
 
   bool? status = false;
 
+  @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Calendar(),
       ],

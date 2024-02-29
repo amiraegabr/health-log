@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:healthlog/home_screen.dart';
 import 'package:healthlog/registrationScreens/login.dart';
-import 'package:healthlog/gnavmenu.dart';
-import 'package:healthlog/onboardingScreens/onboarding.dart';
-import 'package:healthlog/reminders/reminders.dart';
-import 'package:healthlog/reminders/calender.dart';
 import 'themes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+
+  // firebase initialization
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const App());
 }
 
@@ -19,7 +22,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      // title: '',
       theme: AppTheme.lightTheme,
       home: const SafeArea(
         bottom: false,

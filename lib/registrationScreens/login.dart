@@ -51,45 +51,96 @@ class Login extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 50,horizontal: 30),
 
-                  child: Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(children: [
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Email / Phone number",
-                              // labelStyle: TextStyle(
-                              //     color: Theme.of(context).primaryColor),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).primaryColor)),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                          Theme.of(context).primaryColor)),
-                            ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                            labelText: "Email / Phone number",
+                            // labelStyle: TextStyle(
+                            //     color: Theme.of(context).primaryColor),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color:
+                                        Theme.of(context).primaryColor)),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color:
+                                        Theme.of(context).primaryColor)),
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: "Password",
-                              suffixIcon: const Icon(CupertinoIcons.eye),
-                              // labelStyle: TextStyle(
-                              //   color: Theme.of(context).primaryColor),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .primaryColor)),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .primaryColor)),
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        TextFormField(
+                          obscureText: true,
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            suffixIcon: const Icon(CupertinoIcons.eye),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context)
+                                        .primaryColor)),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Theme.of(context)
+                                        .primaryColor)),
 
+                          ),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const forgetPass(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              'FORGOT PASSWORD?',
+                              style: TextStyle(
+                                  fontSize: 16, color: Colors.black),
+                            )),
+                      ]),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        constraints:
+                            const BoxConstraints.tightForFinite(
+                          width: 300,
+                          height: 60,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color:
+                              Theme.of(context).splashColor,
+                        ),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const homeScreen(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              "LOG IN",)
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'DON\'T HAVE AN ACCOUNT?',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
                             ),
                           ),
                           TextButton(
@@ -98,75 +149,20 @@ class Login extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const forgetPass(),
+                                        const SignUp(),
                                   ),
                                 );
                               },
                               child: const Text(
-                                'FORGOT PASSWORD?',
+                                'SIGN UP',
                                 style: TextStyle(
-                                    fontSize: 16, color: Colors.black),
+                                  color: Color(0xFF129A7F),
+                                  fontSize: 20,
+                                ),
                               )),
-                        ]),
-                        Container(
-                          constraints:
-                              const BoxConstraints.tightForFinite(
-                            width: 300,
-                            height: 60,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color:
-                                Theme.of(context).splashColor,
-                          ),
-                          child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const homeScreen(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                "LOG IN",)
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'DON\'T HAVE AN ACCOUNT?',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                              ),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SignUp(),
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  'SIGN UP',
-                                  style: TextStyle(
-                                    color: Color(0xFF129A7F),
-                                    fontSize: 20,
-                                  ),
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),

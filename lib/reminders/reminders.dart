@@ -4,7 +4,6 @@ import 'package:healthlog/reminders/medications_page.dart';
 import 'package:healthlog/settings.dart';
 import '../add_medication.dart';
 
-import 'calender.dart';
 
 class Reminders extends StatefulWidget {
   const Reminders({super.key});
@@ -29,14 +28,14 @@ class _RemindersState extends State<Reminders> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Reminders"),
+          title: const Text("Reminders"),
           // leading: IconButton(
           //     onPressed: () {}, icon: (const Icon(Icons.arrow_back_ios))),
           actions: <Widget>[
             IconButton(
               icon: const Icon(Icons.settings),
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> SettingsPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> const SettingsPage()));
               },
             ),
           ],
@@ -58,7 +57,7 @@ class _RemindersState extends State<Reminders> {
                   child: Container(
                     height: 60,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
                       ),
@@ -68,7 +67,7 @@ class _RemindersState extends State<Reminders> {
                     ),
                     // color: Theme.of(context).primaryColor,
                     // ),
-                    child: Align(
+                    child: const Align(
                         alignment: Alignment.center,
                         child: Text("Medications")),
                   ),
@@ -77,7 +76,7 @@ class _RemindersState extends State<Reminders> {
                   child: Container(
                     height: 60,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
+                      borderRadius: const BorderRadius.only(
                         topRight: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),
@@ -86,7 +85,7 @@ class _RemindersState extends State<Reminders> {
                           width: 1),
                       // color: Theme.of(context).primaryColor,
                     ),
-                    child: Align(
+                    child: const Align(
                         alignment: Alignment.center,
                         child: Text("Appointments")),
                   ),
@@ -105,7 +104,7 @@ class _RemindersState extends State<Reminders> {
           backgroundColor: const Color(0xFF129A7F),
           child: const Icon(Icons.add),
         ),
-        body: TabBarView(
+        body: const TabBarView(
           children: [
             MedicationsPage(),
             AppointmentsPage(),

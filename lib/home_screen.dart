@@ -1,7 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:healthlog/gnavmenu.dart';
-import 'package:healthlog/reminders/reminders.dart';
 
 class homeScreen extends StatelessWidget {
   const homeScreen({super.key});
@@ -25,7 +23,7 @@ class homeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         color: Theme.of(context).primaryColor,
         buttonBackgroundColor: Theme.of(context).primaryColor,
-        animationDuration: Duration(milliseconds: 300),
+        animationDuration: const Duration(milliseconds: 300),
         
         onTap: (index){
 

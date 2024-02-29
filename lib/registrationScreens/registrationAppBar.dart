@@ -16,7 +16,7 @@ class RegistrationAppBar extends StatelessWidget
         mainAxisAlignment: MainAxisAlignment.center,
           children: [
         SizedBox(width: 40, child: Image.asset("assets/images/logo.png")),
-        SizedBox(width: 20,),
+        const SizedBox(width: 20,),
         const Text("HEALTH LOG"),
       ]),
     );
@@ -24,5 +24,5 @@ class RegistrationAppBar extends StatelessWidget
 
   @override
   // TODO: implement preferredSize
-  Size get preferredSize => Size.fromHeight(kToolbarHeight +20);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight +30);
 }

@@ -48,170 +48,172 @@ class SignUp extends StatelessWidget {
                         topRight: Radius.circular(20))),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 50,horizontal: 30),
-                  child: Expanded(
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: screenSize.width/2.5,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: "First Name",
-                                  // labelStyle: TextStyle(
-                                  //     color: Theme.of(context).primaryColor),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                          Theme.of(context).primaryColor)),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                          Theme.of(context).primaryColor)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SizedBox(
+                                width: screenSize.width/2.5,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: "First Name",
+                                    // labelStyle: TextStyle(
+                                    //     color: Theme.of(context).primaryColor),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color:
+                                            Theme.of(context).primaryColor)),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color:
+                                            Theme.of(context).primaryColor)),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: screenSize.width/2.5,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: "Last Name",
-                                  // labelStyle: TextStyle(
-                                  //     color: Theme.of(context).primaryColor),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                          Theme.of(context).primaryColor)),
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide: BorderSide(
-                                          color:
-                                          Theme.of(context).primaryColor)),
+                              SizedBox(
+                                width: screenSize.width/2.5,
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: "Last Name",
+                                    // labelStyle: TextStyle(
+                                    //     color: Theme.of(context).primaryColor),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color:
+                                            Theme.of(context).primaryColor)),
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color:
+                                            Theme.of(context).primaryColor)),
+                                  ),
                                 ),
                               ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Email / Phone number",
+                              // labelStyle: TextStyle(
+                              //     color: Theme.of(context).primaryColor),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                      Theme.of(context).primaryColor)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color:
+                                      Theme.of(context).primaryColor)),
                             ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            labelText: "Email / Phone number",
-                            // labelStyle: TextStyle(
-                            //     color: Theme.of(context).primaryColor),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color:
-                                    Theme.of(context).primaryColor)),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color:
-                                    Theme.of(context).primaryColor)),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            labelText: "Password",
-                            suffixIcon: const Icon(CupertinoIcons.eye),
-                            // labelStyle: TextStyle(
-                            //   color: Theme.of(context).primaryColor),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .primaryColor)),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .primaryColor)),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: "Password",
+                              suffixIcon: const Icon(CupertinoIcons.eye),
+                              // labelStyle: TextStyle(
+                              //   color: Theme.of(context).primaryColor),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .primaryColor)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .primaryColor)),
 
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            labelText: "Re-Enter Password",
-                            suffixIcon: const Icon(CupertinoIcons.eye),
-                            // labelStyle: TextStyle(
-                            //   color: Theme.of(context).primaryColor),
-                            enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .primaryColor)),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                    color: Theme.of(context)
-                                        .primaryColor)),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              labelText: "Re-Enter Password",
+                              suffixIcon: const Icon(CupertinoIcons.eye),
+                              // labelStyle: TextStyle(
+                              //   color: Theme.of(context).primaryColor),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .primaryColor)),
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                      color: Theme.of(context)
+                                          .primaryColor)),
 
+                            ),
                           ),
+                          const SizedBox(height: 30),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        constraints:
+                            const BoxConstraints.tightForFinite(
+                          width: 300,
+                          height: 60,
                         ),
-                        const SizedBox(height: 30),
-                        Container(
-                          constraints:
-                              const BoxConstraints.tightForFinite(
-                            width: 300,
-                            height: 60,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Theme.of(context).splashColor
+                        ),
+                        child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const homeScreen(),
+                                ),
+                              );
+                            },
+                            child: const Text(
+                              "CONTINUE",
+                            )),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'ALREADY HAVE AN ACCOUNT?',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                            ),
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Theme.of(context).splashColor
-                          ),
-                          child: MaterialButton(
+                          TextButton(
                               onPressed: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const homeScreen(),
+                                        const Login(),
                                   ),
                                 );
                               },
                               child: const Text(
-                                "CONTINUE",
+                                'LOG IN',
                                 style: TextStyle(
-                                  fontSize: 27,
+                                  color: Color(0xFF129A7F),
+                                  fontSize: 20,
                                 ),
                               )),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'ALREADY HAVE AN ACCOUNT?',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                              ),
-                            ),
-                            TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const Login(),
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  'LOG IN',
-                                  style: TextStyle(
-                                    color: Color(0xFF129A7F),
-                                    fontSize: 20,
-                                  ),
-                                )),
-                          ],
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "768990210333",
+    "project_id": "healthlog-6fbbf",
+    "storage_bucket": "healthlog-6fbbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768990210333:android:2db4f57bd0d296d21d59f4",
+        "android_client_info": {
+          "package_name": "com.example.healthlog"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6uiyFB0ywC7OWeLVfnQWrIedE-MN_WUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
