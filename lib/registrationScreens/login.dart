@@ -92,8 +92,8 @@ class Login extends StatelessWidget {
                         TextButton(
                             onPressed: () {
                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
+                                context
+                                ,MaterialPageRoute(
                                   builder: (context) =>
                                       const forgetPass(),
                                 ),
@@ -125,7 +125,7 @@ class Login extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const homeScreen(),
+                                      const HomeScreen(),
                                 ),
                               );
                             },

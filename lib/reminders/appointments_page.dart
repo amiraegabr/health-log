@@ -11,7 +11,7 @@ class AppointmentsPage extends StatefulWidget {
 class _AppointmentsPageState extends State<AppointmentsPage> {
   @override
 
-  bool? status = false;
+  // bool? status = false;
 
   @override
   Widget build(BuildContext context) {

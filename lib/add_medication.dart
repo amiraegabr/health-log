@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class Add_Medication extends StatefulWidget {
-  const Add_Medication({super.key});
+class AddMedication extends StatefulWidget {
+  const AddMedication({super.key});
 
   @override
-  State<Add_Medication> createState() => _AddMedicationState();
+  State<AddMedication> createState() => _AddMedicationState();
 }
 
-class _AddMedicationState extends State<Add_Medication> {
+class _AddMedicationState extends State<AddMedication> {
   int _selectedDays = 1;
   int _selectedTimes = 1;
   String? value;

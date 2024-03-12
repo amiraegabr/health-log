@@ -97,7 +97,7 @@ class _RemindersState extends State<Reminders> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const Add_Medication(),
+                builder: (context) => const AddMedication(),
               ),
             );
           },
