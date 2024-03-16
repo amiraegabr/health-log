@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthlog/settings.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,10 +18,23 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false,
         title: const Text("Hello username"),
         actions: [
-          Icon(
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                  const SettingsPage(),
+                ),
+              );
+            },
+            icon: Icon(
             Icons.settings,
-            color: Theme.of(context).primaryColor,
-          ),
+            color: Theme
+                .of(context)
+                .primaryColor,
+          ),),
+
           const SizedBox(
             width: 20,
           )
