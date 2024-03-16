@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:healthlog/add_medication.dart';
-import 'package:healthlog/home_screen.dart';
-import 'package:healthlog/navigation_bar.dart';
-import 'package:healthlog/registrationScreens/signup.dart';
-import 'package:healthlog/reminders/reminders.dart';
+import 'package:healthlog/splash.dart';
 import 'themes.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 // Future<void> main() async {
-
-  // // firebase initialization
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+//   // firebase initialization
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp(
+//     // options: DefaultFirebaseOptions.currentPlatform,
+//   );
+// }
 main(){
 
   runApp(const App());
@@ -31,7 +27,7 @@ class App extends StatelessWidget {
       title: "Health log",
       home: const SafeArea(
         bottom: false,
-          child: Reminders(),
+          child: SplashScreen(),
       ),
     );
   }

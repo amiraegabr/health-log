@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:healthlog/home_screen.dart';
+import 'package:healthlog/navigation_bar.dart';
 import 'package:healthlog/registrationScreens/registrationAppBar.dart';
 import 'package:healthlog/registrationScreens/reset_password.dart';
 import 'signup.dart';
@@ -125,7 +125,7 @@ class Login extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const HomeScreen(),
+                                      const AppNavigation(),
                                 ),
                               );
                             },
