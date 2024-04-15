@@ -1,8 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:healthlog/home_screen.dart';
-import 'package:healthlog/profile.dart';
-import 'package:healthlog/reminders/reminders.dart';
+import 'package:healthlog/screens/home_screen.dart';
+import 'package:healthlog/screens/profile.dart';
+import 'package:healthlog/screens/reminders/reminders.dart';
 
 class AppNavigation extends StatefulWidget {
   const AppNavigation({super.key});
@@ -17,7 +17,7 @@ class _AppNavigationState extends State<AppNavigation> {
 
   final List<Widget> _pages = [
     const ProfilePage(),
-    const HomeScreen(),
+     HomeScreen(),
     const Reminders(),
   ];
 

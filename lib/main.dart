@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:healthlog/splash.dart';
-import 'themes.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:healthlog/firebase_options.dart';
+import 'package:healthlog/screens/splash.dart';
+import 'themes.dart';
+// import 'package:firebase_core/firebase_core.dart';
 
 // Future<void> main() async {
 //   // firebase initialization
@@ -10,8 +12,11 @@ import 'package:firebase_core/firebase_core.dart';
 //     // options: DefaultFirebaseOptions.currentPlatform,
 //   );
 // }
-main(){
-
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const App());
 }
 
@@ -25,10 +30,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       title: "Health log",
-      home: const SafeArea(
-        bottom: false,
-          child: SplashScreen(),
-      ),
+      home: const SplashScreen(),
     );
   }
 }

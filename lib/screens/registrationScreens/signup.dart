@@ -1,12 +1,72 @@
-import 'package:flutter/cupertino.dart';
-import 'package:healthlog/home_screen.dart';
-import 'package:healthlog/registrationScreens/registrationAppBar.dart';
-
-import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import '../../ui_components/registration_button.dart';
+import '../../ui_components/registration_input.dart';
+import 'login.dart';
+import '../../ui_components/registrationAppBar.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({super.key});
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  //text editing controllers
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmedPasswordController = TextEditingController();
+
+  //sign user in
+  void SignUserUp() async {
+    //loading circle
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    //try creating user
+        //check password match
+        if(passwordController.text != confirmedPasswordController.text){
+          Navigator.pop(context);
+          PassErrorMessage();
+          //pop loading circle
+        } else {
+          //passwords match
+        try  {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
+      }on FirebaseAuthException catch (e) {
+          if (e.code == "email-already-in-use") {
+            SignedErrorMessage();
+            Navigator.pop(context);
+
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    Login(),
+              ),
+            );
+          }
+        }
+    }
+  }
+  void PassErrorMessage() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("passwords dont match"),
+      ));
+
+  void SignedErrorMessage() => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text("You already have an account \n Try signing in"),
+      ));
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +107,14 @@ class SignUp extends StatelessWidget {
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20))),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50,horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               SizedBox(
                                 width: screenSize.width/2.5,
@@ -97,92 +157,34 @@ class SignUp extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          TextFormField(
-                            decoration: InputDecoration(
-                              labelText: "Email / Phone number",
-                              // labelStyle: TextStyle(
-                              //     color: Theme.of(context).primaryColor),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                      Theme.of(context).primaryColor)),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color:
-                                      Theme.of(context).primaryColor)),
-                            ),
+                          InputTextField(
+                            controller: emailController,
+                            label: "Email / Phone number",
+                            obscureText: false,
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          TextFormField(
+                          InputTextField(
+                            controller: passwordController,
+                            label: "Password",
                             obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: "Password",
-                              suffixIcon: const Icon(CupertinoIcons.eye),
-                              // labelStyle: TextStyle(
-                              //   color: Theme.of(context).primaryColor),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .primaryColor)),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .primaryColor)),
-
-                            ),
+                            suffIcon: const Icon(Icons.remove_red_eye_rounded),
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          TextFormField(
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              labelText: "Re-Enter Password",
-                              suffixIcon: const Icon(CupertinoIcons.eye),
-                              // labelStyle: TextStyle(
-                              //   color: Theme.of(context).primaryColor),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .primaryColor)),
-                              focusedBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(
-                                      color: Theme.of(context)
-                                          .primaryColor)),
-
-                            ),
-                          ),
+                          InputTextField(controller: confirmedPasswordController,
+                            label: "Confirm password", obscureText: true, suffIcon: Icon(Icons.remove_red_eye_rounded),),
                           const SizedBox(height: 30),
                         ],
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        constraints:
-                            const BoxConstraints.tightForFinite(
-                          width: 300,
-                          height: 60,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Theme.of(context).splashColor
-                        ),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const HomeScreen(),
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              "CONTINUE",
-                            )),
+                      RegistrationButton(
+                        label: "SIGN UP",
+                        onTap: SignUserUp,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -200,7 +202,7 @@ class SignUp extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const Login(),
+                                        Login(),
                                   ),
                                 );
                               },

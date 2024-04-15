@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class Notes extends StatelessWidget {
+  const Notes({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Center(
-        child: Text("Settings page"),
+      body: Column(
+        children: [
+          Text("NO NOTES YET"),
+        ],
       ),
+
     );
   }
 }

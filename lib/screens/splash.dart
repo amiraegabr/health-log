@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healthlog/registrationScreens/login.dart';
+import 'package:healthlog/auth.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -11,9 +11,9 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.push(context, MaterialPageRoute(builder: (context) {
-        return const Login();
+        return AuthPage();
       }));
     });
   }

@@ -5,6 +5,7 @@ class AppTheme {
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
+    // scaffoldBackgroundColor: Colors.grey(300),
     primaryColor: const Color(0xFF129A7F),
     splashColor: const Color(0xFFFFA873),
     cardColor: const Color(0xFFB1DDD5),
