@@ -6,8 +6,9 @@ class InputTextField extends StatelessWidget {
   final String label;
   final bool obscureText;
   final Icon? suffIcon;
+  final Icon? preIcon;
 
-  InputTextField({super.key, this.controller, required this.label, required this.obscureText, this.suffIcon});
+  InputTextField({super.key, this.controller, required this.label, required this.obscureText, this.suffIcon, this.preIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class InputTextField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         suffixIcon: suffIcon,
+        icon: preIcon,
         enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
                 color:

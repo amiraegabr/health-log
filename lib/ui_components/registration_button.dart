@@ -13,15 +13,15 @@ class RegistrationButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
        width: double.infinity,
-        padding: EdgeInsets.all(25),
+        padding: const EdgeInsets.all(25),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
           color: Theme.of(context).splashColor,
         ),
         child: Center(
           child: Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),

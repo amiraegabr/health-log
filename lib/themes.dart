@@ -28,30 +28,19 @@ class AppTheme {
       labelLarge: const TextStyle()
           .copyWith(fontSize: 12, fontWeight: FontWeight.normal),
     ),
-    elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xffFFA873),
-            foregroundColor: Colors.black,
-            padding: const EdgeInsets.all(10),
-            textStyle: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                color: Colors.black),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)))),
 
-    //text form filed
-    //msh sha8al dk why
-    // inputDecorationTheme: InputDecorationTheme(
-    //   labelStyle: TextStyle(color: Color(0xFF129A7F)),
-    //   enabledBorder: UnderlineInputBorder(
-    //     borderSide: BorderSide(color: Color(0xFF129A7F)),
-    //   ),
-    //   focusedBorder: UnderlineInputBorder(
-    //     borderSide: BorderSide(color: Color(0xFF129A7F)),
-    //   ),
-    // ),
 
+    // elevatedButtonTheme: ElevatedButtonThemeData(
+    //     style: ElevatedButton.styleFrom(
+    //         backgroundColor: const Color(0xffFFA873),
+    //         foregroundColor: Colors.black,
+    //         padding: const EdgeInsets.all(10),
+    //         textStyle: const TextStyle(
+    //             fontSize: 16,
+    //             fontWeight: FontWeight.normal,
+    //             color: Colors.black),
+    //         shape: RoundedRectangleBorder(
+    //             borderRadius: BorderRadius.circular(12)))),
 
 
     //   checkbox

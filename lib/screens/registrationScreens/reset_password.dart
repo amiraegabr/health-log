@@ -1,31 +1,25 @@
-
 import 'package:flutter/material.dart';
-import 'verfication.dart';
+import 'verification.dart';
 
-class forgetPass extends StatelessWidget {
-  const forgetPass({super.key});
+class ForgetPass extends StatelessWidget {
+  const ForgetPass({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: SingleChildScrollView(
+        child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const SizedBox(
-                height: 150,
-              ),
               const Text(
                 "Enter your Email",
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 30,
                   color: Color(0xFF129A7F),
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w600,
                 ),
-              ),
-              const SizedBox(
-                height: 70.0,
               ),
               TextFormField(
                 keyboardType: TextInputType.emailAddress,
@@ -38,46 +32,34 @@ class forgetPass extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: Theme.of(context).splashColor)),
                 ),
-              ),
-              const SizedBox(
-                height: 70.0,
               ),
               Container(
-                constraints: const BoxConstraints.tightForFinite(
-                  width: 300,
-                  height: 60,
-                ),
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: const Color(0xFF129A7F),
                 ),
-                child: Container(
-                  constraints: const BoxConstraints.tightForFinite(
-                    width: 300,
-                    height: 60,
-                  ),
-
-                  child: MaterialButton(
-                      onPressed: () {
-                        Navigator.push( context,
-                          MaterialPageRoute(
-                            builder: (context) => const verfication(),
-                          ),
-                        );
-                      },
-                      child: const Text(
-                        'Send verfication code',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 27,
-                          // backgroundColor: Colors.orange,
-                          // color: Colors.white,
-                          // fontSize: 20,
-                          // fontWeight: FontWeight.bold,
+                child: MaterialButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Verification(),
                         ),
-                      )),
-                ),
+                      );
+                    },
+                    child: const Text(
+                      'Send Verification Code',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    )),
               ),
             ],
           ),

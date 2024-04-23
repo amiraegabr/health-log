@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthlog/screens/registrationScreens/reset_password.dart';
+import 'package:healthlog/ui_components/navigation_bar.dart';
 import 'package:healthlog/ui_components/registration_button.dart';
 import 'package:healthlog/ui_components/registration_input.dart';
 import '../../ui_components/registrationAppBar.dart';
@@ -35,6 +36,14 @@ class _LoginState extends State<Login> {
           email: emailController.text, password: passwordController.text);
       //pop loading circle
       Navigator.pop(context);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) =>
+          const AppNavigation(),
+        ),
+      );
+
     }
     //wrong email or password
     on FirebaseAuthException catch (e) {
@@ -120,7 +129,7 @@ class _LoginState extends State<Login> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const forgetPass(),
+                                      builder: (context) => const ForgetPass(),
                                     ),
                                   );
                                 },

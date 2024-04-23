@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../ui_components/registration_button.dart';
@@ -18,6 +19,10 @@ class _SignUpState extends State<SignUp> {
   final passwordController = TextEditingController();
   final confirmedPasswordController = TextEditingController();
 
+  //details controllers
+  final firstName = TextEditingController();
+  final lastName = TextEditingController();
+
   //sign user in
   void SignUserUp() async {
     //loading circle
@@ -29,27 +34,32 @@ class _SignUpState extends State<SignUp> {
           );
         });
 
-    //try creating user
         //check password match
         if(passwordController.text != confirmedPasswordController.text){
           Navigator.pop(context);
           PassErrorMessage();
-          //pop loading circle
         } else {
           //passwords match
         try  {
+        // creating user
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
+        // user details
+          await FirebaseFirestore.instance.collection('users').add({
+            'email': emailController.text,
+            'first name': firstName.text,
+            'last name': lastName.text,
+          });
+
       }on FirebaseAuthException catch (e) {
           if (e.code == "email-already-in-use") {
             SignedErrorMessage();
             Navigator.pop(context);
-
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) =>
-                    Login(),
+                    const Login(),
               ),
             );
           }
@@ -118,39 +128,11 @@ class _SignUpState extends State<SignUp> {
                             children: [
                               SizedBox(
                                 width: screenSize.width/2.5,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: "First Name",
-                                    // labelStyle: TextStyle(
-                                    //     color: Theme.of(context).primaryColor),
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                            Theme.of(context).primaryColor)),
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                            Theme.of(context).primaryColor)),
-                                  ),
-                                ),
+                                child: InputTextField(controller: firstName,label: "First Name",obscureText: false,),
                               ),
                               SizedBox(
                                 width: screenSize.width/2.5,
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                    labelText: "Last Name",
-                                    // labelStyle: TextStyle(
-                                    //     color: Theme.of(context).primaryColor),
-                                    enabledBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                            Theme.of(context).primaryColor)),
-                                    focusedBorder: UnderlineInputBorder(
-                                        borderSide: BorderSide(
-                                            color:
-                                            Theme.of(context).primaryColor)),
-                                  ),
-                                ),
+                                child: InputTextField(controller: lastName,label: "Last Name",obscureText: false,),
                               ),
                             ],
                           ),
