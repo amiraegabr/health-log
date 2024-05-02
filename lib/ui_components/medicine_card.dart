@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 class MedicineCard extends StatelessWidget {
   final String title;
+  final VoidCallback onEditPressed;
+  final VoidCallback onDeletePressed;
 
-  const MedicineCard({super.key, required this.title});
+  const MedicineCard({
+    super.key,
+    required this.title,
+    required this.onEditPressed,
+    required this.onDeletePressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,36 +35,40 @@ class MedicineCard extends StatelessWidget {
                 ),
                 Container(
                   padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).cardColor,
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                    ),
-                    child: Text("Time")),
-
-                Text("Edit / delete"),
-
-                // Container(
-                //     decoration: BoxDeco60y0ration(
-                //         border: Border.all,.ew(color: Colors.black, width: 2),
-                //         borderRadius: BorderRadius.all(Radius.circular(5))),
-                //     child: Icon(Icons.more_horiz_rounded))
-                
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  child: Text("Time"),
+                ),
+                Spacer(),
                 ElevatedButton(
-                    onPressed: (){},
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero
+                  onPressed: onEditPressed,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Icon(Icons.more_horiz_rounded))
+                  ),
+                  child: Icon(Icons.edit),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: onDeletePressed,
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                  child: Icon(Icons.delete),
+                ),
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text("Medicine info"),
-
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Text("Medicine info"),
           ],
         ),
