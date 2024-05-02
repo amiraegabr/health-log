@@ -3,14 +3,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../ui_components/registration_button.dart';
 import '../../ui_components/registration_input.dart';
-import 'login.dart';
 import '../../ui_components/registrationAppBar.dart';
+import 'login.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  _SignUpState createState() => _SignUpState();
 }
 
 class _SignUpState extends State<SignUp> {
@@ -20,63 +20,69 @@ class _SignUpState extends State<SignUp> {
   final confirmedPasswordController = TextEditingController();
 
   //details controllers
-  final firstName = TextEditingController();
-  final lastName = TextEditingController();
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
 
   //sign user in
-  void SignUserUp() async {
+  Future<void> signUserUp() async {
     //loading circle
     showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
 
-        //check password match
-        if(passwordController.text != confirmedPasswordController.text){
-          Navigator.pop(context);
-          PassErrorMessage();
-        } else {
-          //passwords match
-        try  {
-        // creating user
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text);
-        // user details
-          await FirebaseFirestore.instance.collection('users').add({
-            'email': emailController.text,
-            'first name': firstName.text,
-            'last name': lastName.text,
-          });
+    //check password match
+    if (passwordController.text != confirmedPasswordController.text) {
+      Navigator.pop(context);
+      showErrorDialog('Passwords do not match');
+      return;
+    }
 
-      }on FirebaseAuthException catch (e) {
-          if (e.code == "email-already-in-use") {
-            SignedErrorMessage();
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const Login(),
-              ),
-            );
-          }
-        }
+    //passwords match
+    try {
+      // creating user
+      final userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      // user details
+      await FirebaseFirestore.instance.collection('users').doc(userCredential.user!.uid).set({
+        'email': emailController.text,
+        'first name': firstNameController.text,
+        'last name': lastNameController.text,
+      });
+
+      Navigator.pop(context);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const Login(),
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      if (e.code == 'email-already-in-use') {
+        showErrorDialog('Email already in use');
+      } else {
+        showErrorDialog('Sign up failed');
+      }
     }
   }
-  void PassErrorMessage() => showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text("passwords dont match"),
-      ));
 
-  void SignedErrorMessage() => showDialog(
+  void showErrorDialog(String message) {
+    showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text("You already have an account \n Try signing in"),
-      ));
+        title: Text('Error'),
+        content: Text(message),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -91,24 +97,24 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Padding(
-               padding: const EdgeInsets.only(left: 20),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Text(
-                     "WELCOME TO HEALTH LOG!",
-                       style: Theme.of(context).textTheme.displayMedium
-                   ),
-                   const SizedBox(height: 10,),
-                   Text(
-                     "LET'S SET UP YOUR ACCOUNT",
-                     style: Theme.of(context).textTheme.displaySmall,
-                   ),
-                   const SizedBox(height: 10,),
-                 ],
-               ),
-             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "WELCOME TO HEALTH LOG!",
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    "LET'S SET UP YOUR ACCOUNT",
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(height: 10),
+                ],
+              ),
+            ),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -126,13 +132,19 @@ class _SignUpState extends State<SignUp> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              SizedBox(
-                                width: screenSize.width/2.5,
-                                child: InputTextField(controller: firstName,label: "First Name",obscureText: false,),
+                              Expanded(
+                                child: InputTextField(
+                                  controller: firstNameController,
+                                  label: "First Name",
+                                  obscureText: false,
+                                ),
                               ),
-                              SizedBox(
-                                width: screenSize.width/2.5,
-                                child: InputTextField(controller: lastName,label: "Last Name",obscureText: false,),
+                              Expanded(
+                                child: InputTextField(
+                                  controller: lastNameController,
+                                  label: "Last Name",
+                                  obscureText: false,
+                                ),
                               ),
                             ],
                           ),
@@ -151,13 +163,17 @@ class _SignUpState extends State<SignUp> {
                             controller: passwordController,
                             label: "Password",
                             obscureText: true,
-                            suffIcon: const Icon(Icons.remove_red_eye_rounded),
+                            suffixIcon: const Icon(Icons.remove_red_eye_rounded),
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          InputTextField(controller: confirmedPasswordController,
-                            label: "Confirm password", obscureText: true, suffIcon: Icon(Icons.remove_red_eye_rounded),),
+                          InputTextField(
+                            controller: confirmedPasswordController,
+                            label: "Confirm password",
+                            obscureText: true,
+                            suffixIcon: const Icon(Icons.remove_red_eye_rounded),
+                          ),
                           const SizedBox(height: 30),
                         ],
                       ),
@@ -166,7 +182,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       RegistrationButton(
                         label: "SIGN UP",
-                        onTap: SignUserUp,
+                        onTap: signUserUp,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -179,22 +195,22 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                           TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        Login(),
-                                  ),
-                                );
-                              },
-                              child: const Text(
-                                'LOG IN',
-                                style: TextStyle(
-                                  color: Color(0xFF129A7F),
-                                  fontSize: 20,
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Login(),
                                 ),
-                              )),
+                              );
+                            },
+                            child: const Text(
+                              'LOG IN',
+                              style: TextStyle(
+                                color: Color(0xFF129A7F),
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ],
@@ -206,5 +222,15 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmedPasswordController.dispose();
+    firstNameController.dispose();
+    lastNameController.dispose();
+    super.dispose();
   }
 }
