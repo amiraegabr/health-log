@@ -6,13 +6,22 @@ class MedicationsPage extends StatefulWidget {
   const MedicationsPage({super.key});
 
   @override
-  State<MedicationsPage> createState() => _MedicationsPageState();
+  _MedicationsPageState createState() => _MedicationsPageState();
 }
 
 class _MedicationsPageState extends State<MedicationsPage> {
-  @override
+  List<String> medications = [
+    'Vitamin D',
+    'Ibuprofen',
+    'Multivitamin',
+  ];
+  List<bool> medicationStatus = [];
 
-  bool? status = false;
+  @override
+  void initState() {
+    super.initState();
+    medicationStatus = List.filled(medications.length, false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +35,6 @@ class _MedicationsPageState extends State<MedicationsPage> {
               borderRadius: BorderRadius.circular(20),
               color: const Color.fromRGBO(177, 221, 213, 1),
             ),
-            // width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.all(25.0),
               child: SingleChildScrollView(
@@ -37,54 +45,27 @@ class _MedicationsPageState extends State<MedicationsPage> {
                       'Medications for today:',
                       style: TextStyle(fontSize: 20),
                     ),
-                    CheckboxListTile(
-                        controlAffinity:
-                        ListTileControlAffinity.leading,
+                    for (int i = 0; i < medications.length; i++)
+                      CheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
                         checkColor: const Color(0xFF129A7F),
-                        title: const Text(
-                          'Vitamin D',
-                          style: TextStyle(fontSize: 20),
+                        title: Text(
+                          medications[i],
+                          style: const TextStyle(fontSize: 20),
                         ),
-                        value: status,
+                        value: medicationStatus[i],
                         onChanged: (val) {
                           setState(() {
-                            status = val!;
+                            medicationStatus[i] = val!;
                           });
-                        }),
-                    CheckboxListTile(
-                        controlAffinity:
-                        ListTileControlAffinity.leading,
-                        checkColor: const Color(0xFF129A7F),
-                        title: const Text(
-                          'Vitamin D',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        value: status,
-                        onChanged: (val) {
-                          setState(() {
-                            status = val!;
-                          });
-                        }),
-                    CheckboxListTile(
-                        controlAffinity:
-                        ListTileControlAffinity.leading,
-                        checkColor: const Color(0xFF129A7F),
-                        title: const Text(
-                          'Vitamin D',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        value: status,
-                        onChanged: (val) {
-                          setState(() {
-                            status = val!;
-                          });
-                        }),
+                        },
+                      ),
                   ],
                 ),
               ),
             ),
           ),
-          MedicineCard(title: "Medicine Name",),
+          MedicineCard(title: "Medicine Name"),
         ],
       ),
     );
