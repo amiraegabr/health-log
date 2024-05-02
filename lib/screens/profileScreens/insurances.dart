@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
 
-class Insurances extends StatelessWidget {
-  const Insurances({super.key});
+class InsurancesScreen extends StatelessWidget {
+  const InsurancesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: [
-          Text("ADD INSYRANCES >"),
-        ],
+      appBar: AppBar(
+        title: Text('Insurances'),
       ),
-
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                // Add insurance functionality here
+              },
+              child: Text('Add Insurance'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
