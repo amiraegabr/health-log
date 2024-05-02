@@ -1,29 +1,41 @@
+import java.io.File
+import java.io.FileInputStream
+import java.util.Properties
+
 pluginManagement {
     def flutterSdkPath = {
         def properties = new Properties()
-        file("local.properties").withInputStream { properties.load(it) }
+        new File("local.properties").withInputStream { properties.load(it) }
         def flutterSdkPath = properties.getProperty("flutter.sdk")
-        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        if (flutterSdkPath == null) {
+            throw new AssertionError("flutter.sdk not set in local.properties")
+        }
         return flutterSdkPath
     }
+
     settings.ext.flutterSdkPath = flutterSdkPath()
+}
 
-    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
-
+buildscript {
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
 
-    plugins {
-        id "dev.flutter.flutter-gradle-plugin" version "1.0.0" apply false
+    dependencies {
+        classpath "dev.flutter:flutter-gradle-plugin:1.0.0"
+        classpath "com.android.tools.build:gradle:7.3.0"
     }
 }
 
-plugins {
-    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
-    id "com.android.application" version "7.3.0" apply false
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
+
+apply plugin: "dev.flutter.flutter-plugin-loader"
 
 include ":app"
