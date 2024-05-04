@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:healthlog/screens/reminders/appointments_page.dart';
 import 'package:healthlog/screens/reminders/medications_page.dart';
 import 'package:healthlog/screens/settings.dart';
-import 'add_medication.dart';
+import 'add_new_medication.dart';
 
 
 class Reminders extends StatefulWidget {
@@ -46,6 +46,7 @@ class _RemindersState extends State<Reminders> {
                 right: 20,
               ),
               labelPadding: EdgeInsets.zero,
+              labelColor: Colors.black,
               unselectedLabelColor: Theme.of(context).primaryColor,
               indicator: BoxDecoration(
                 // borderRadius: BorderRadius.horizontal(left: Radius.circular(20)),
@@ -56,33 +57,33 @@ class _RemindersState extends State<Reminders> {
                 Tab(
                   child: Container(
                     height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
                       ),
-                      border: Border.all(
-                          color: const Color.fromRGBO(255, 168, 115, 1),
-                          width: 1),
+                      // border: Border.all(
+                      //     color: const Color.fromRGBO(255, 168, 115, 1),
+                      //     width: 1),
                     ),
                     // color: Theme.of(context).primaryColor,
                     // ),
                     child: const Align(
                         alignment: Alignment.center,
-                        child: Text("Medications")),
+                        child: Text("Medications",)),
                   ),
                 ),
                 Tab(
                   child: Container(
                     height: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
                         topRight: Radius.circular(20),
                         bottomRight: Radius.circular(20),
                       ),
-                      border: Border.all(
-                          color: const Color.fromRGBO(255, 168, 115, 1),
-                          width: 1),
+                      // border: Border.all(
+                      //     color: const Color.fromRGBO(255, 168, 115, 1),
+                      //     width: 1),
                       // color: Theme.of(context).primaryColor,
                     ),
                     child: const Align(
@@ -97,7 +98,7 @@ class _RemindersState extends State<Reminders> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const AddMedication(),
+                builder: (context) => AddNewMedication(),
               ),
             );
           },
