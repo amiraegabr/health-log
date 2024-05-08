@@ -67,6 +67,7 @@ class _RemindersState extends State<Reminders> with SingleTickerProviderStateMix
       appBar: AppBar(
         title: const Text("Reminders"),
         centerTitle: true,
+        automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.settings),

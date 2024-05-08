@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthlog/screens/registrationScreens/signup.dart';
 import 'package:healthlog/ui_components/navigation_bar.dart';
-import 'screens/registrationScreens/login.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -14,11 +14,11 @@ class AuthPage extends StatelessWidget {
         builder: (context, snapshot){
           //user logged in
           if (snapshot.hasData){
-            return AppNavigation();
+            return const AppNavigation();
           }
           //user not logged in
           else{
-            return Login();
+            return const SignUp();
           }
         },
       ),

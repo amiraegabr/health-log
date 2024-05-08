@@ -45,7 +45,7 @@ class _AddNewMedicationState extends State<AddNewMedication> {
         'type': medType,
         'frequency_days': _selectedDays,
         'frequency_times': _selectedTimes,
-        'reminder_date': _selectedDate,
+        // 'reminder_date': _selectedDate,
       });
     }
   }
@@ -446,32 +446,6 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                         const SizedBox(height: 10,)
                       ],
                     ),
-                    // Add a new step for calendar selection
-                    Column(
-                      children: [
-                        Text(
-                          'SELECT REMINDER DATE',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        SizedBox(height: 10),
-                        TableCalendar(
-                          focusedDay: _selectedDate?? DateTime.now(),
-                          firstDay: DateTime.utc(2020),
-                          lastDay: DateTime.utc(2030),
-                          onDaySelected: (day, focusedDay) {
-                            setState(() {
-                              _selectedDate = day;
-                            });
-                          },
-                          calendarFormat: CalendarFormat.twoWeeks,
-                          headerStyle: HeaderStyle(
-                            formatButtonVisible: false,
-                          ),
-                          availableGestures: AvailableGestures.all,
-                          selectedDayPredicate: (day) => isSameDay(day, _selectedDate),
-                        ),
-                      ],
-                    ),
                     //confirm
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -522,3 +496,30 @@ class _AddNewMedicationState extends State<AddNewMedication> {
     );
   }
 }
+
+// Add a new step for calendar selection
+// Column(
+// children: [
+// Text(
+// 'SELECT REMINDER DATE',
+// style: TextStyle(fontSize: 18),
+// ),
+// SizedBox(height: 10),
+// TableCalendar(
+// focusedDay: _selectedDate?? DateTime.now(),
+// firstDay: DateTime.utc(2020),
+// lastDay: DateTime.utc(2030),
+// onDaySelected: (day, focusedDay) {
+// setState(() {
+// _selectedDate = day;
+// });
+// },
+// calendarFormat: CalendarFormat.twoWeeks,
+// headerStyle: HeaderStyle(
+// formatButtonVisible: false,
+// ),
+// availableGestures: AvailableGestures.all,
+// selectedDayPredicate: (day) => isSameDay(day, _selectedDate),
+// ),
+// ],
+// ),
