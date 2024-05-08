@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:healthlog/screens/registrationScreens/reset_password.dart';
 import 'package:healthlog/ui_components/navigation_bar.dart';
 import 'package:healthlog/ui_components/registration_button.dart';
+import 'package:healthlog/ui_components/navigationAppBar.dart';
 import 'package:healthlog/ui_components/registration_input.dart';
-import '../../ui_components/registrationAppBar.dart';
 import 'signup.dart';
 
 class Login extends StatefulWidget {
@@ -40,26 +40,28 @@ class _LoginState extends State<Login> {
         context,
         MaterialPageRoute(
           builder: (context) =>
-          const AppNavigation(),
+              const SignUp(), // corrected the screen name
         ),
       );
-
     }
     //wrong email or password
     on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found" || e.code == 'wrong-password') {
         print("no user for this mail");
-        ErrorMessage();
+        _showErrorMessage("Incorrect email or password");
       }
     }
   }
 
-//error message
-  void ErrorMessage() => showDialog(
-      context: context,
-      builder: (context) => const AlertDialog(
-            title: Text("Incorrect email or password"),
-          ));
+  //error message
+  void _showErrorMessage(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: content,
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +87,7 @@ class _LoginState extends State<Login> {
                     height: 10,
                   ),
                   Text(
-                    "LOG INTO YOUR ACCOUNT",
+                    "LOG IN TO YOUR ACCOUNT",
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                   const SizedBox(
@@ -121,6 +123,9 @@ class _LoginState extends State<Login> {
                           obscureText: true,
                           suffIcon: const Icon(Icons.remove_red_eye_rounded),
                         ),
+                        const SizedBox(
+                          height: 30,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -129,7 +134,7 @@ class _LoginState extends State<Login> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const ForgetPass(),
+                                      builder: (context) => const ResetPassword(),
                                     ),
                                   );
                                 },
@@ -144,6 +149,9 @@ class _LoginState extends State<Login> {
                       RegistrationButton(
                         label: "LOG IN",
                         onTap: LogUserIn,
+                      ),
+                      const SizedBox(
+                        height: 30,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -160,7 +168,9 @@ class _LoginState extends State<Login> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const SignUp(),
+                                    builder: (context) => {
+                                      const SignUp(),
+                                    },
                                   ),
                                 );
                               },
@@ -182,5 +192,12 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

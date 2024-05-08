@@ -1,1 +1,13 @@
 #include "Generated.xcconfig"
+
+// Include other necessary headers here
+
+int main() {
+    // Initialize variables
+    // Perform necessary operations
+
+    // Print output
+    printf("Hello, World!\n");
+
+    return 0;
+}
