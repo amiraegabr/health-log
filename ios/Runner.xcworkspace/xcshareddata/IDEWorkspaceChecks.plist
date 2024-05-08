@@ -2,7 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- This key is used to enable or disable the 32-bit warning in Xcode. Setting it to true will enable the warning. -->
 	<key>IDEDidComputeMac32BitWarning</key>
-	<true/>
+	<false/>
 </dict>
 </plist>
