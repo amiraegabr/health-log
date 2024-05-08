@@ -4,7 +4,7 @@ class InputTextField extends StatelessWidget {
 
   final controller;
   final String label;
-  final bool obscureText;
+  bool obscureText = false;
   final Icon? suffIcon;
   final Icon? preIcon;
 

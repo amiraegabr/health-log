@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:healthlog/screens/reminders/reminders.dart';
+import 'package:healthlog/screens/reminders/reminders_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AddNewMedication extends StatefulWidget {
   AddNewMedication({super.key});
@@ -18,6 +19,8 @@ class _AddNewMedicationState extends State<AddNewMedication> {
   String? value;
   String? medType;
   final name = TextEditingController();
+
+  DateTime? _selectedDate;
 
   final PageController pageController = PageController();
 
@@ -42,6 +45,7 @@ class _AddNewMedicationState extends State<AddNewMedication> {
         'type': medType,
         'frequency_days': _selectedDays,
         'frequency_times': _selectedTimes,
+        'reminder_date': _selectedDate,
       });
     }
   }
@@ -442,47 +446,71 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                         const SizedBox(height: 10,)
                       ],
                     ),
-                    //confirm
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            children: [
-                              Text(name.text),
-                              Text("Medicine type: $medType"),
-                              Text("Medicine frequency: Every $_selectedDays days, $_selectedTimes times per day"),
-                            ],
+                    // Add a new step for calendar selection
+                    Column(
+                      children: [
+                        Text(
+                          'SELECT REMINDER DATE',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(height: 10),
+                        TableCalendar(
+                          focusedDay: _selectedDate?? DateTime.now(),
+                          firstDay: DateTime.utc(2020),
+                          lastDay: DateTime.utc(2030),
+                          onDaySelected: (day, focusedDay) {
+                            setState(() {
+                              _selectedDate = day;
+                            });
+                          },
+                          calendarFormat: CalendarFormat.twoWeeks,
+                          headerStyle: HeaderStyle(
+                            formatButtonVisible: false,
                           ),
+                          availableGestures: AvailableGestures.all,
+                          selectedDayPredicate: (day) => isSameDay(day, _selectedDate),
+                        ),
+                      ],
+                    ),
+                    //confirm
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          children: [
+                            Text(name.text),
+                            Text("Medicine type: $medType"),
+                            Text("Medicine frequency: Every $_selectedDays days, $_selectedTimes times per day"),
+                          ],
+                        ),
 
-                          Container(
-                            constraints: const BoxConstraints.tightForFinite(
-                              width: 200,
-                              height: 60,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: Theme.of(context).splashColor,
-                            ),
-                            child: MaterialButton(
-                              onPressed: () async {
-                                //save to database
-                                await saveMedicineData();
-                                // Move to the next screen
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Reminders()));
-                              },
-                              child: const Text(
-                                "Continue",
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                ),
+                        Container(
+                          constraints: const BoxConstraints.tightForFinite(
+                            width: 200,
+                            height: 60,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Theme.of(context).splashColor,
+                          ),
+                          child: MaterialButton(
+                            onPressed: () async {
+                              //save to database
+                              await saveMedicineData();
+                              // Move to the next screen
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => Reminders()));
+                            },
+                            child: const Text(
+                              "Continue",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 20,
                               ),
                             ),
                           ),
-                          const SizedBox(height: 10,)
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 10,)
+                      ],
                     ),
                   ],
                 ),

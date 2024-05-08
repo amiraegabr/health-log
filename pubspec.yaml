@@ -38,7 +38,11 @@ dependencies:
 #  cupertino_icons: ^1.0.2
   smooth_page_indicator: ^1.1.0
   curved_navigation_bar: ^1.0.3
+
   pin_code_text_field: ^1.8.0
+  image_picker: ^1.1.0
+  firebase_storage:
+
   table_calendar: ^3.0.9
 
   #firebase
@@ -46,6 +50,11 @@ dependencies:
   firebase_auth: ^4.17.6
   cloud_firestore: ^4.15.6
 
+  flutter_launcher_icons:
+flutter_launcher_icons:
+  image_path: "assets/images/logo.png"
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:

@@ -53,9 +53,6 @@ class _CalendarState extends State<Calendar> {
         formatButtonVisible: false,
       ),
       availableGestures: AvailableGestures.all,
-      // locale: "en_US",
-      // rowHeight: 35,
-
       selectedDayPredicate: (day) => isSameDay(day, today),
 
     );

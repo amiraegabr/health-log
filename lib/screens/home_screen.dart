@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthlog/screens/settings.dart';
+import 'package:healthlog/ui_components/symptoms_card.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
@@ -37,9 +38,16 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: const Center(
+          child: Column(
+            children: [
+              SymptomsCard(),
 
-      body: const Center(
-        child: Text("Home"),
+            ],
+          ),
+        ),
       ),
     );
   }

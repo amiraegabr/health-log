@@ -19,33 +19,51 @@ class MedicineCard extends StatelessWidget {
         child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: ListTile(
-              title: Text(
-                medication.name,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    medication.name,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  PopupMenuButton<String>(
+                      onSelected: (String value) {
+                        if (value == 'Edit') {
+                          // Add code to edit the medication
+                        } else if (value == 'Delete') {
+                          //delete
+                        }
+                      },
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<String>>[
+                            const PopupMenuItem<String>(
+                              value: 'Edit',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.edit),
+                                  SizedBox(width: 5,),
+                                  Text('Edit'),
+                                ],
+                              ),
+                            ),
+                            const PopupMenuItem<String>(
+                              value: 'Delete',
+                              child: Row(
+                                children: [
+                                  Icon(Icons.delete),
+                                  SizedBox(width: 5,),
+                                  Text('Delete'),
+                                ],
+                              ),
+                            ),
+                          ]),
+                ],
               ),
               subtitle: Text(
                 '${medication.type} - Every ${medication.frequencyDays} days,\n ${medication.frequencyTimes} times per day',
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
-              trailing: PopupMenuButton<String>(
-                  onSelected: (String value) {
-                    if (value == 'Edit') {
-                      // Add code to edit the medication
-                    } else if (value == 'Delete') {
-//delete
-                    }
-                  },
-                  itemBuilder: (BuildContext context) =>
-                      <PopupMenuEntry<String>>[
-                        PopupMenuItem<String>(
-                          value: 'Edit',
-                          child: Text('Edit'),
-                        ),
-                        PopupMenuItem<String>(
-                          value: 'Delete',
-                          child: Text('Delete'),
-                        ),
-                      ]),
             )),
       ),
     );

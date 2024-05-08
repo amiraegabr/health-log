@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../ui_components/profile_cards.dart';
 import 'profileScreens/doctors.dart';
 import 'profileScreens/insurances.dart';
 import 'profileScreens/medical_id.dart';
@@ -42,8 +42,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ProfileCards(
-                  leading: const Icon(Icons.person, size: 36,),
+                child: const ProfileCards(
+                  leading: Icon(Icons.person, size: 36,),
                   title: "Medical ID",
                   subtitle: "Your personal and medical information",
                 ),
@@ -58,8 +58,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ProfileCards(
-                  leading: const Icon(Icons.verified_user_rounded,size: 36,),
+                child: const ProfileCards(
+                  leading: Icon(Icons.verified_user_rounded,size: 36,),
                   title: "Insurances",
                   subtitle: "Check your insurances",
                 ),
@@ -74,8 +74,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ProfileCards(
-                  leading: const Icon(Icons.collections_bookmark_rounded, size: 36,),
+                child: const ProfileCards(
+                  leading: Icon(Icons.collections_bookmark_rounded, size: 36,),
                   title: "Medical Records",
                   subtitle: "Medical and Pending Records",
                 ),
@@ -90,8 +90,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ProfileCards(
-                  leading: const Icon(Icons.vaccines_rounded, size: 36,),
+                child: const ProfileCards(
+                  leading: Icon(Icons.vaccines_rounded, size: 36,),
                   title: "Medications",
                   subtitle: "You don't have any medications yet",
                 ),
@@ -106,8 +106,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ProfileCards(
-                  leading: const Icon(Icons.people_alt_rounded, size: 36,),
+                child: const ProfileCards(
+                  leading: Icon(Icons.people_alt_rounded, size: 36,),
                   title: "Doctors",
                   subtitle: "Check your doctors' saved information ",
                 ),
@@ -122,8 +122,8 @@ class ProfilePage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ProfileCards(
-                  leading: const Icon(Icons.note_alt_rounded, size: 36,),
+                child: const ProfileCards(
+                  leading: Icon(Icons.note_alt_rounded, size: 36,),
                   title: "Notes",
                   subtitle: "You don't have any notes yet",
                 ),
@@ -131,47 +131,6 @@ class ProfilePage extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ProfileCards extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final leading;
-
-  const ProfileCards({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    this.leading,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 15),
-      color: Theme.of(context).cardColor,
-      child: ListTile(
-        // onTap: (){},
-        iconColor: Theme.of(context).primaryColor,
-        titleTextStyle: const TextStyle(color: Colors.black ,fontSize: 20, fontWeight: FontWeight.w400),
-        leading: Container(
-          padding: EdgeInsets.zero,
-          height: 42,
-          width: 42,
-          decoration: BoxDecoration(
-              // color: Theme.of(context).cardColor,
-            // color: Colors.green,
-              borderRadius: BorderRadius.circular(20)),
-
-          child: leading,
-        ),
-        title: Text(
-          title,),
-        subtitle: Text(subtitle),
-        trailing: const Icon(Icons.arrow_forward_ios_rounded),
       ),
     );
   }

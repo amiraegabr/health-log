@@ -39,11 +39,11 @@ class _MedicationsPageState extends State<MedicationsPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(15),
+      padding: const EdgeInsets.all(15),
       child: CustomScrollView(
         slivers: [
-          SliverToBoxAdapter(child: Calendar()),
-          SliverToBoxAdapter(child: SizedBox(height: 10)),
+          const SliverToBoxAdapter(child: Calendar()),
+          const SliverToBoxAdapter(child: SizedBox(height: 10)),
           if (medications.isNotEmpty)
             SliverList(
               delegate: SliverChildBuilderDelegate(

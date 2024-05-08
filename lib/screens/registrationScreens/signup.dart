@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthlog/ui_components/navigation_bar.dart';
 import '../../ui_components/registration_button.dart';
 import '../../ui_components/registration_input.dart';
 import 'login.dart';
@@ -22,6 +23,15 @@ class _SignUpState extends State<SignUp> {
   //details controllers
   final firstName = TextEditingController();
   final lastName = TextEditingController();
+
+  //dispose of input
+  void dispose(){
+    emailController.dispose();
+    passwordController.dispose();
+    confirmedPasswordController.dispose();
+    firstName.dispose();
+    lastName.dispose();
+  }
 
   //sign user in
   void SignUserUp() async {
@@ -50,6 +60,8 @@ class _SignUpState extends State<SignUp> {
             'first name': firstName.text,
             'last name': lastName.text,
           });
+          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute(builder: (context)=> AppNavigation()));
 
       }on FirebaseAuthException catch (e) {
           if (e.code == "email-already-in-use") {
