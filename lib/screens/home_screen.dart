@@ -1,7 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthlog/screens/settings.dart';
+import 'package:healthlog/ui_components/no_app_saved.dart';
 import 'package:healthlog/ui_components/symptoms_card.dart';
+
+import '../ui_components/no_meds_saved.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
@@ -38,14 +41,19 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: const Center(
-          child: Column(
-            children: [
-              SymptomsCard(),
-
-            ],
+      body: const SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Center(
+            child: Column(
+              children: [
+                SymptomsCard(),
+                SizedBox(height: 30,),
+                NoMedsCard(),
+                SizedBox(height: 30,),
+                NoAppsCard(),
+              ],
+            ),
           ),
         ),
       ),

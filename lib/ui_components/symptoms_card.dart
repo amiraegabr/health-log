@@ -18,17 +18,16 @@ class SymptomsCard extends StatelessWidget {
         },
         child: Container(
           width: double.infinity,
-          padding: const EdgeInsets.all(25),
+          padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             color: Theme.of(context).cardColor,
-            boxShadow: const [
+            boxShadow: [
               BoxShadow(
-                color: Colors.tealAccent,
-                blurRadius: 7,
-                spreadRadius: 5,
-                offset: Offset(7, 7),
-                blurStyle: BlurStyle.normal
+                color: Colors.grey.shade300,
+                blurRadius: 20,
+                spreadRadius: 4,
+                offset: Offset(10, 10),
               )
             ]
           ),
@@ -39,7 +38,7 @@ class SymptomsCard extends StatelessWidget {
                 children: [
                   Text(
                     "Not feeling well?",
-                    style: TextStyle(fontSize: 24),
+                    style: TextStyle(fontSize: 24,fontWeight: FontWeight.w600),
                   ),
                   Text("Let's figure out why.", style: TextStyle(fontSize: 18)),
                 ],

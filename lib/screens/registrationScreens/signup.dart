@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthlog/screens/registrationScreens/profile_setup.dart';
 import 'package:healthlog/ui_components/navigation_bar.dart';
 import '../../ui_components/registration_button.dart';
 import '../../ui_components/registration_input.dart';
@@ -31,6 +32,7 @@ class _SignUpState extends State<SignUp> {
     confirmedPasswordController.dispose();
     firstName.dispose();
     lastName.dispose();
+    super.dispose();
   }
 
   //sign user in
@@ -57,11 +59,11 @@ class _SignUpState extends State<SignUp> {
         // user details
           await FirebaseFirestore.instance.collection('users').add({
             'email': emailController.text,
-            'first name': firstName.text,
-            'last name': lastName.text,
+            'firstName': firstName.text,
+            'lastName': lastName.text,
           });
           Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> AppNavigation()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>  const ProfileSetUp()));
 
       }on FirebaseAuthException catch (e) {
           if (e.code == "email-already-in-use") {
@@ -80,14 +82,20 @@ class _SignUpState extends State<SignUp> {
   }
   void PassErrorMessage() => showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => const AlertDialog(
         title: Text("passwords dont match"),
       ));
 
   void SignedErrorMessage() => showDialog(
       context: context,
-      builder: (context) => AlertDialog(
+      builder: (context) => const AlertDialog(
         title: Text("You already have an account \n Try signing in"),
+      ));
+
+  void EmptyErrorMessage() => showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text("Please fill in all feilds to continue"),
       ));
 
   @override
@@ -98,8 +106,6 @@ class _SignUpState extends State<SignUp> {
       appBar: const RegistrationAppBar(),
       resizeToAvoidBottomInset: false,
       body: SizedBox(
-        height: screenSize.height,
-        width: screenSize.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -117,7 +123,7 @@ class _SignUpState extends State<SignUp> {
                      "LET'S SET UP YOUR ACCOUNT",
                      style: Theme.of(context).textTheme.displaySmall,
                    ),
-                   const SizedBox(height: 10,),
+                   const SizedBox(height: 30,),
                  ],
                ),
              ),
@@ -153,7 +159,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                           InputTextField(
                             controller: emailController,
-                            label: "Email / Phone number",
+                            label: "Email",
                             obscureText: false,
                           ),
                           const SizedBox(
@@ -169,7 +175,7 @@ class _SignUpState extends State<SignUp> {
                             height: 30,
                           ),
                           InputTextField(controller: confirmedPasswordController,
-                            label: "Confirm password", obscureText: true, suffIcon: Icon(Icons.remove_red_eye_rounded),),
+                            label: "Confirm password", obscureText: true, suffIcon: const Icon(Icons.remove_red_eye_rounded),),
                           const SizedBox(height: 30),
                         ],
                       ),
@@ -196,7 +202,7 @@ class _SignUpState extends State<SignUp> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        Login(),
+                                        const Login(),
                                   ),
                                 );
                               },
@@ -204,7 +210,8 @@ class _SignUpState extends State<SignUp> {
                                 'LOG IN',
                                 style: TextStyle(
                                   color: Color(0xFF129A7F),
-                                  fontSize: 20,
+                                  fontSize: 15,
+                                    fontWeight: FontWeight.bold
                                 ),
                               )),
                         ],

@@ -50,13 +50,13 @@ class ProfilePage extends StatelessWidget {
               ),
               InkWell(
                 onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                      const Insurances(),
-                    ),
-                  );
+                  // Navigator.push(
+                    // context,
+                    // MaterialPageRoute(
+                    //   builder: (context) =>
+                    //   // const Insurances(),
+                    // ),
+                  // );
                 },
                 child: const ProfileCards(
                   leading: Icon(Icons.verified_user_rounded,size: 36,),
@@ -102,7 +102,7 @@ class ProfilePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                      const Doctors(),
+                       Doctors(),
                     ),
                   );
                 },

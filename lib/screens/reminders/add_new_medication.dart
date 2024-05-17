@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:healthlog/screens/reminders/reminders_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class AddNewMedication extends StatefulWidget {
   AddNewMedication({super.key});
@@ -35,19 +34,17 @@ class _AddNewMedicationState extends State<AddNewMedication> {
   //save in firebase
   Future<void> saveMedicineData() async {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final User? user = FirebaseAuth.instance.currentUser;
+    final userID = FirebaseAuth.instance.currentUser!.uid;
 
-    if (user != null) {
-      final String userId = user.uid;
+    await firestore.collection('users').doc(userID).collection('medications').add({
+      'name': name.text,
+      'type': medType,
+      'frequency_days': _selectedDays,
+      'frequency_times': _selectedTimes,
+      // 'reminder_date': _selectedDate,
 
-      await firestore.collection('users').doc(userId).collection('medications').add({
-        'name': name.text,
-        'type': medType,
-        'frequency_days': _selectedDays,
-        'frequency_times': _selectedTimes,
-        // 'reminder_date': _selectedDate,
-      });
-    }
+    });
+
   }
 
   @override
@@ -257,7 +254,9 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                               'HOW OFTEN ?',
                               style: TextStyle(fontSize: 18),
                             ),
-                            const SizedBox(height: 10,),
+                            const SizedBox(
+                              height: 10,
+                            ),
                             GestureDetector(
                               onTap: () {
                                 showCupertinoModalPopup(
@@ -286,7 +285,8 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                         onSelectedItemChanged: (index) {
                                           // Update selected days value
                                           setState(() {
-                                            _selectedDays = index + 1; // Adding 1 as index starts from 0
+                                            _selectedDays = index +
+                                                1; // Adding 1 as index starts from 0
                                           });
                                         },
                                         // Generate list of items for the picker
@@ -296,7 +296,8 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                             child: Text(
                                               '${index + 1}',
                                               // Display numbers from 1 to 30
-                                              style: const TextStyle(fontSize: 20),
+                                              style:
+                                                  const TextStyle(fontSize: 20),
                                             ),
                                           );
                                         }),
@@ -312,9 +313,11 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         'EVERY  $_selectedDays DAYS',
@@ -329,7 +332,9 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 30,),
+                            const SizedBox(
+                              height: 30,
+                            ),
                             const Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Text(
@@ -348,7 +353,8 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         // Background color of the picker
-                                        borderRadius: BorderRadius.circular(12.0),
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
                                         // Rounded corners
                                         boxShadow: [
                                           BoxShadow(
@@ -365,7 +371,8 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                         onSelectedItemChanged: (index) {
                                           // Update selected days value
                                           setState(() {
-                                            _selectedTimes = index + 1; // Adding 1 as index starts from 0
+                                            _selectedTimes = index +
+                                                1; // Adding 1 as index starts from 0
                                           });
                                         },
                                         // Generate list of items for the picker
@@ -375,7 +382,8 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                             child: Text(
                                               '${index + 1}',
                                               // Display numbers from 1 to 30
-                                              style: const TextStyle(fontSize: 20),
+                                              style:
+                                                  const TextStyle(fontSize: 20),
                                             ),
                                           );
                                         }),
@@ -391,9 +399,11 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
                                   child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         ' $_selectedTimes TIMES PER DAY',
@@ -410,7 +420,7 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                             ),
                           ],
                         ),
-                         Divider(
+                        Divider(
                           indent: 60,
                           endIndent: 60,
                           color: Theme.of(context).splashColor,
@@ -429,8 +439,7 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                 if (_currentIndex < 2) {
                                   pageController.animateToPage(
                                     _currentIndex + 1,
-                                    duration:
-                                        const Duration(milliseconds: 500),
+                                    duration: const Duration(milliseconds: 500),
                                     curve: Curves.easeInOut,
                                   );
                                 }
@@ -443,7 +452,9 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                                 ),
                               )),
                         ),
-                        const SizedBox(height: 10,)
+                        const SizedBox(
+                          height: 10,
+                        )
                       ],
                     ),
                     //confirm
@@ -454,10 +465,10 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                           children: [
                             Text(name.text),
                             Text("Medicine type: $medType"),
-                            Text("Medicine frequency: Every $_selectedDays days, $_selectedTimes times per day"),
+                            Text(
+                                "Medicine frequency: Every $_selectedDays days, $_selectedTimes times per day"),
                           ],
                         ),
-
                         Container(
                           constraints: const BoxConstraints.tightForFinite(
                             width: 200,
@@ -472,7 +483,10 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                               //save to database
                               await saveMedicineData();
                               // Move to the next screen
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => Reminders()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Reminders()));
                             },
                             child: const Text(
                               "Continue",
@@ -483,7 +497,9 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10,)
+                        const SizedBox(
+                          height: 10,
+                        )
                       ],
                     ),
                   ],

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:healthlog/screens/registrationScreens/reset_password.dart';
 import 'package:healthlog/ui_components/navigation_bar.dart';
 import 'package:healthlog/ui_components/registration_button.dart';
-import 'package:healthlog/ui_components/navigationAppBar.dart';
 import 'package:healthlog/ui_components/registration_input.dart';
+import '../../ui_components/registrationAppBar.dart';
 import 'signup.dart';
 
 class Login extends StatefulWidget {
@@ -39,8 +39,7 @@ class _LoginState extends State<Login> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              const SignUp(), // corrected the screen name
+          builder: (context) => const AppNavigation(),
         ),
       );
     }
@@ -48,24 +47,33 @@ class _LoginState extends State<Login> {
     on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found" || e.code == 'wrong-password') {
         print("no user for this mail");
-        _showErrorMessage("Incorrect email or password");
+        ErrorMessage("Incorrect email or password");
       }
     }
   }
 
   //error message
-  void _showErrorMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: content,
-        backgroundColor: Colors.red,
-      ),
-    );
-  }
+  void ErrorMessage(String s) =>
+      showDialog(
+          context: context,
+          builder: (context) =>
+          const AlertDialog(
+            title: Text("Incorrect email or password"),
+          ));
 
-  @override
+  //empty controllers
+  // void dispose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
+
+
+@override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final screenSize = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       backgroundColor: const Color(0xFFB1DDD5),
       appBar: const RegistrationAppBar(),
@@ -82,16 +90,22 @@ class _LoginState extends State<Login> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("WELCOME BACK!",
-                      style: Theme.of(context).textTheme.displayLarge),
+                      style: Theme
+                          .of(context)
+                          .textTheme
+                          .displayLarge),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
                     "LOG IN TO YOUR ACCOUNT",
-                    style: Theme.of(context).textTheme.displaySmall,
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .displaySmall,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                 ],
               ),
@@ -134,7 +148,7 @@ class _LoginState extends State<Login> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const ResetPassword(),
+                                      builder: (context) => const ForgetPass(),
                                     ),
                                   );
                                 },
@@ -165,14 +179,7 @@ class _LoginState extends State<Login> {
                           ),
                           TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => {
-                                      const SignUp(),
-                                    },
-                                  ),
-                                );
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUp()));
                               },
                               child: const Text(
                                 'SIGN UP',
@@ -192,12 +199,5 @@ class _LoginState extends State<Login> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
   }
 }

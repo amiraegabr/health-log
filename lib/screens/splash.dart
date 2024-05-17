@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(177, 221, 213, 1),
           body: Center(
-            child: Image.asset("assets/images/splash logo.png"),
+            child: Image.asset("assets/logos/splashLogo.png"),
           ),
     );
   }

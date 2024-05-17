@@ -15,7 +15,7 @@ class RegistrationAppBar extends StatelessWidget
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
           children: [
-        SizedBox(width: 40, child: Image.asset("assets/images/logo.png")),
+        SizedBox(width: 40, child: Image.asset("assets/logos/logo.png")),
         const SizedBox(width: 20,),
         const Text("HEALTH LOG"),
       ]),

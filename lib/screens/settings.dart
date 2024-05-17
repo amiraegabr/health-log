@@ -1,11 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthlog/screens/registrationScreens/signup.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
-  void SignUserOut(){
-    FirebaseAuth.instance.signOut();
+  Future<void> logUserOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (e) {
+      print('Error signing out: $e');
+    }
   }
 
   @override
@@ -14,12 +19,20 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          Center(
+          const Center(
             child: Text("Settings page"),
           ),
-          IconButton(onPressed: (){
-            SignUserOut;
-          }, icon: Icon(Icons.logout_rounded)),
+          IconButton(
+            onPressed: () {
+              logUserOut().then((_) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SignUp()),
+                );
+              });
+            },
+            icon: const Icon(Icons.logout_rounded),
+          ),
         ],
       ),
     );

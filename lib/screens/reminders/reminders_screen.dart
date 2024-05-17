@@ -55,7 +55,7 @@ class _RemindersState extends State<Reminders> with SingleTickerProviderStateMix
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>  AddNewAppointment(),
+          builder: (context) =>  const AddNewAppointment(),
         ),
       );
     }

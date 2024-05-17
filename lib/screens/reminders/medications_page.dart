@@ -24,10 +24,12 @@ class _MedicationsPageState extends State<MedicationsPage> {
 
   Future<void> fetchMedications() async {
     final user = FirebaseAuth.instance.currentUser;
+    final userID = user?.uid;
+
     if (user != null) {
       final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('users')
-          .doc(user.uid)
+          .doc(userID)
           .collection('medications')
           .get();
       setState(() {
@@ -40,18 +42,17 @@ class _MedicationsPageState extends State<MedicationsPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: CustomScrollView(
-        slivers: [
-          const SliverToBoxAdapter(child: Calendar()),
-          const SliverToBoxAdapter(child: SizedBox(height: 10)),
+      child: Column(
+        children: [
+          const SizedBox(height: 10),
           if (medications.isNotEmpty)
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
+            Expanded(
+              child: ListView.builder(
+                itemCount: medications.length,
+                itemBuilder: (context, index) {
                   final medication = medications[index];
                   return MedicineCard(medication: medication, medications: medications);
                 },
-                childCount: medications.length,
               ),
             ),
         ],

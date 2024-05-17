@@ -1,15 +1,14 @@
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:healthlog/ui_components/navigation_bar.dart';
 import 'package:image_picker/image_picker.dart';
-import '../../ui_components/navigation_bar.dart';
 import '../../ui_components/registration_button.dart';
-import '../../ui_components/registration_input.dart';
-import 'login.dart';
 import '../../ui_components/registrationAppBar.dart';
+import '../../ui_components/registration_input.dart';
+
 
 class ProfileSetUp extends StatefulWidget {
   const ProfileSetUp({super.key});
@@ -19,16 +18,55 @@ class ProfileSetUp extends StatefulWidget {
 }
 
 class _ProfileSetUpState extends State<ProfileSetUp> {
-  //text editing controllers
-  final emailController = TextEditingController();
+  //fetch user account
+  final user = FirebaseAuth.instance.currentUser!;
 
-  //details controllers
-  final firstName = TextEditingController();
-  final lastName = TextEditingController();
+  late String firstName ;
+  late String lastName;
+
+  //text editing controllers
+  // TextEditingController birthDate = TextEditingController();
+  late String birthDate;
   final age = TextEditingController();
   final picker = ImagePicker();
 
   File? _image;
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        Map<String, dynamic> data = documentSnapshot.data() as Map<String, dynamic>;
+        setState(() {
+          firstName = data['firstName'];
+          lastName = data['lastName'];
+        });
+      } else {
+        // User document not found
+      }
+    });
+  }
+
+
+  Future<void> selectDate() async{
+    DateTime? pickDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1960),
+        lastDate: DateTime(2060)
+    );
+    if (pickDate != null){
+      setState(() {
+        birthDate = pickDate.toString() ;
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,17 +87,17 @@ class _ProfileSetUpState extends State<ProfileSetUp> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("WELCOME TO HEALTH LOG!",
+                  Text("LET'S SETUP YOUR ACCOUNT",
                       style: Theme.of(context).textTheme.displayMedium),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "LET'S SET UP YOUR ACCOUNT",
+                    "Some details to get you started",
                     style: Theme.of(context).textTheme.displaySmall,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 30,
                   ),
                 ],
               ),
@@ -92,15 +130,38 @@ class _ProfileSetUpState extends State<ProfileSetUp> {
                             ),
                           ),
                           const SizedBox(height: 30),
-                          //fetch name from database
+                          //fetch names from database
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                width: screenSize.width/2.5,
+                                child: Text(firstName),
+                              ),
+                              SizedBox(
+                                width: screenSize.width/2.5,
+                                child: Text(lastName),
+                              ),
+                            ],
+                          ),
                           const SizedBox(
                             height: 30,
                           ),
-                          TextField(),
+                          //birthdate
+                          TextField(
+                            // controller: birthDate,
+                            decoration: const InputDecoration(
+                              labelText: "Birthdate",
+                              suffixIcon: Icon(Icons.calendar_month_rounded),
+                            ),
+                            onTap: ()  {
+                            },
+                          ),
+
                           const SizedBox(
                             height: 30,
                           ),
-                          TextField(),
+                          const TextField(),
                           const SizedBox(
                             height: 30,
                           ),
@@ -115,12 +176,13 @@ class _ProfileSetUpState extends State<ProfileSetUp> {
                         onTap: () {
                           //add details to user profile
                           //continue to home screen
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const AppNavigation()));
                         },
                       ),
-                      Row(
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          const Text(
+                          Text(
                             'Skip for now',
                             style: TextStyle(
                               color: Colors.black,

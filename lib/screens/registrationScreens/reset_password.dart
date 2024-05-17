@@ -34,7 +34,7 @@ class _ForgetPassState extends State<ForgetPass> {
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
+                  decoration:  InputDecoration(
                     labelText: 'Email',
                     prefixIcon: Icon(
                       Icons.email,
@@ -91,8 +91,8 @@ class _ForgetPassState extends State<ForgetPass> {
 }
 
 
-@override
-void dispose() {
-  _emailController.dispose();
-  super.dispose();
-}
+// @override
+// void dispose() {
+//   _emailController.dispose();
+//   super.dispose();
+// }
