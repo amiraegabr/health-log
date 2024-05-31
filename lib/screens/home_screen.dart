@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healthlog/screens/settings.dart';
-import 'package:healthlog/ui_components/no_app_saved.dart';
+import 'package:healthlog/ui_components/no_app_card.dart';
 import 'package:healthlog/ui_components/symptoms_card.dart';
 
-import '../ui_components/no_meds_saved.dart';
+import '../ui_components/no_files_card.dart';
+import '../ui_components/no_meds_card.dart';
 
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
@@ -52,6 +53,9 @@ class HomeScreen extends StatelessWidget {
                 NoMedsCard(),
                 SizedBox(height: 30,),
                 NoAppsCard(),
+                SizedBox(height: 30,),
+                NoFilesCard(),
+                SizedBox(height: 30,),
               ],
             ),
           ),

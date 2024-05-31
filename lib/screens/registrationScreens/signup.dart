@@ -5,6 +5,7 @@ import 'package:healthlog/screens/registrationScreens/profile_setup.dart';
 import 'package:healthlog/ui_components/navigation_bar.dart';
 import '../../ui_components/registration_button.dart';
 import '../../ui_components/registration_input.dart';
+import '../../ui_components/registration_password_input.dart';
 import 'login.dart';
 import '../../ui_components/registrationAppBar.dart';
 
@@ -16,6 +17,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  bool _obscureText = false;
+
   //text editing controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -26,7 +29,7 @@ class _SignUpState extends State<SignUp> {
   final lastName = TextEditingController();
 
   //dispose of input
-  void dispose(){
+  void dispose() {
     emailController.dispose();
     passwordController.dispose();
     confirmedPasswordController.dispose();
@@ -46,57 +49,57 @@ class _SignUpState extends State<SignUp> {
           );
         });
 
-        //check password match
-        if(passwordController.text != confirmedPasswordController.text){
-          Navigator.pop(context);
-          PassErrorMessage();
-        } else {
-          //passwords match
-        try  {
+    //check password match
+    if (passwordController.text != confirmedPasswordController.text) {
+      Navigator.pop(context);
+      PassErrorMessage();
+    } else {
+      //passwords match
+      try {
         // creating user
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
         // user details
-          await FirebaseFirestore.instance.collection('users').add({
-            'email': emailController.text,
-            'firstName': firstName.text,
-            'lastName': lastName.text,
-          });
+        await FirebaseFirestore.instance.collection('users').add({
+          'email': emailController.text,
+          'firstName': firstName.text,
+          'lastName': lastName.text,
+        });
+        Navigator.pop(context);
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AppNavigation()));
+      } on FirebaseAuthException catch (e) {
+        if (e.code == "email-already-in-use") {
+          SignedErrorMessage();
           Navigator.pop(context);
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>  const ProfileSetUp()));
-
-      }on FirebaseAuthException catch (e) {
-          if (e.code == "email-already-in-use") {
-            SignedErrorMessage();
-            Navigator.pop(context);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) =>
-                    const Login(),
-              ),
-            );
-          }
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const Login(),
+            ),
+          );
         }
+      }
     }
   }
+
   void PassErrorMessage() => showDialog(
       context: context,
       builder: (context) => const AlertDialog(
-        title: Text("passwords dont match"),
-      ));
+            title: Text("passwords dont match"),
+          ));
 
   void SignedErrorMessage() => showDialog(
       context: context,
       builder: (context) => const AlertDialog(
-        title: Text("You already have an account \n Try signing in"),
-      ));
+            title: Text("You already have an account \n Try signing in"),
+          ));
 
   void EmptyErrorMessage() => showDialog(
       context: context,
       builder: (context) => const AlertDialog(
-        title: Text("Please fill in all feilds to continue"),
-      ));
+            title: Text("Please fill in all feilds to continue"),
+          ));
 
   @override
   Widget build(BuildContext context) {
@@ -109,24 +112,26 @@ class _SignUpState extends State<SignUp> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Padding(
-               padding: const EdgeInsets.only(left: 20),
-               child: Column(
-                 crossAxisAlignment: CrossAxisAlignment.start,
-                 children: [
-                   Text(
-                     "WELCOME TO HEALTH LOG!",
-                       style: Theme.of(context).textTheme.displayMedium
-                   ),
-                   const SizedBox(height: 10,),
-                   Text(
-                     "LET'S SET UP YOUR ACCOUNT",
-                     style: Theme.of(context).textTheme.displaySmall,
-                   ),
-                   const SizedBox(height: 30,),
-                 ],
-               ),
-             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("WELCOME TO HEALTH LOG!",
+                      style: Theme.of(context).textTheme.displayMedium),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "LET'S SET UP YOUR ACCOUNT",
+                    style: Theme.of(context).textTheme.displaySmall,
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              ),
+            ),
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -145,12 +150,18 @@ class _SignUpState extends State<SignUp> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               SizedBox(
-                                width: screenSize.width/2.5,
-                                child: InputTextField(controller: firstName,label: "First Name",obscureText: false,),
+                                width: screenSize.width / 2.5,
+                                child: InputTextField(
+                                  controller: firstName,
+                                  label: "First Name",
+                                ),
                               ),
                               SizedBox(
-                                width: screenSize.width/2.5,
-                                child: InputTextField(controller: lastName,label: "Last Name",obscureText: false,),
+                                width: screenSize.width / 2.5,
+                                child: InputTextField(
+                                  controller: lastName,
+                                  label: "Last Name",
+                                ),
                               ),
                             ],
                           ),
@@ -160,22 +171,29 @@ class _SignUpState extends State<SignUp> {
                           InputTextField(
                             controller: emailController,
                             label: "Email",
-                            obscureText: false,
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          InputTextField(
-                            controller: passwordController,
-                            label: "Password",
-                            obscureText: true,
-                            suffIcon: const Icon(Icons.remove_red_eye_rounded),
-                          ),
+                          PassInputTextField(
+                              controller: passwordController,
+                              label: "Password",
+                              obscureTextToggle: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              }),
                           const SizedBox(
                             height: 30,
                           ),
-                          InputTextField(controller: confirmedPasswordController,
-                            label: "Confirm password", obscureText: true, suffIcon: const Icon(Icons.remove_red_eye_rounded),),
+                          PassInputTextField(
+                              controller: confirmedPasswordController,
+                              label: "Confirm password",
+                              obscureTextToggle: () {
+                                setState(() {
+                                  _obscureText = !_obscureText;
+                                });
+                              }),
                           const SizedBox(height: 30),
                         ],
                       ),
@@ -201,18 +219,16 @@ class _SignUpState extends State<SignUp> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        const Login(),
+                                    builder: (context) => const Login(),
                                   ),
                                 );
                               },
                               child: const Text(
                                 'LOG IN',
                                 style: TextStyle(
-                                  color: Color(0xFF129A7F),
-                                  fontSize: 15,
-                                    fontWeight: FontWeight.bold
-                                ),
+                                    color: Color(0xFF129A7F),
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
                               )),
                         ],
                       ),

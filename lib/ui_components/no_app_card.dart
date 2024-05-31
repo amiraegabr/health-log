@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:healthlog/screens/reminders/medications_page.dart';
 import 'package:healthlog/screens/reminders/reminders_screen.dart';
 
-class NoMedsCard extends StatelessWidget {
-  const NoMedsCard({super.key});
+class NoAppsCard extends StatelessWidget {
+  const NoAppsCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +10,7 @@ class NoMedsCard extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const Reminders()),
+          MaterialPageRoute(builder: (context) => Reminders(initialTabIndex: 1)),
         );
       },
       child: Container(
@@ -31,22 +30,23 @@ class NoMedsCard extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              "assets/images/pills group.png",
+              "assets/images/events.png",
               height: 120,
+
             ),
             const SizedBox(
               height: 10,
             ),
             const Text(
-              "Set up Medications",
+              "Add doctor appointments",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
             ),
             const SizedBox(
               height: 10,
             ),
             const Text(
-              "Save all your medications in one place. Set up your schedule and track what you need.",
-              style: TextStyle(fontSize: 18),
+              "Set reminders for your doctors' appointments and never miss them again.",
+              style: TextStyle(fontSize: 18),textAlign: TextAlign.center,
             ),
             const SizedBox(height: 10,),
             SizedBox(
@@ -55,12 +55,12 @@ class NoMedsCard extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Reminders()),
+                      MaterialPageRoute(builder: (context) => Reminders(initialTabIndex: 1)),
                     );
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(8.0),
-                    child: Text("Add a medication", style: TextStyle(fontWeight: FontWeight.w500),),
+                    child: Text("Add a new appointment", style: TextStyle(fontWeight: FontWeight.w500),),
                   )),
             )
           ],

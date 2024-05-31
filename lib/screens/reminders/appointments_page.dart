@@ -18,6 +18,7 @@ class _AppointmentsPageState extends State<AppointmentsPage> {
     return const Column(
       children: [
         Calendar(),
+
       ],
     );
   }

@@ -18,7 +18,7 @@ class _AppNavigationState extends State<AppNavigation> {
   final List<Widget> _pages = [
     const ProfilePage(),
     HomeScreen(),
-    const Reminders(),
+    Reminders(initialTabIndex: 0),
   ];
 
   final _items = [

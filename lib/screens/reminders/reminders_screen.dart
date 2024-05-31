@@ -7,15 +7,16 @@ import 'add_new_appointment.dart';
 import 'add_new_medication.dart';
 
 class Reminders extends StatefulWidget {
-  const Reminders({super.key});
+  final int initialTabIndex;
+
+  Reminders({required this.initialTabIndex, super.key});
 
   @override
   State<Reminders> createState() => _RemindersState();
 }
 
 class _RemindersState extends State<Reminders> with SingleTickerProviderStateMixin {
-  bool? status = false;
-  TabController? _tabController;
+  late TabController _tabController;
   int _currentIndex = 0;
 
   DateTime today = DateTime.now();
@@ -30,16 +31,17 @@ class _RemindersState extends State<Reminders> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _tabController!.addListener(() {
+    _tabController.index = widget.initialTabIndex;
+    _tabController.addListener(() {
       setState(() {
-        _currentIndex = _tabController!.index;
+        _currentIndex = _tabController.index;
       });
     });
   }
 
   @override
   void dispose() {
-    _tabController?.dispose();
+    _tabController.dispose();
     super.dispose();
   }
 

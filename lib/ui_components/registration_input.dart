@@ -4,22 +4,18 @@ class InputTextField extends StatelessWidget {
 
   final controller;
   final String label;
-  bool obscureText = false;
-  final Icon? suffIcon;
   final Icon? preIcon;
 
-  InputTextField({super.key, this.controller, required this.label, required this.obscureText, this.suffIcon, this.preIcon});
+  const InputTextField({super.key, this.controller, required this.label, this.preIcon});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      obscureText: obscureText,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
         labelText: label,
-        suffixIcon: suffIcon,
-        icon: preIcon,
+        prefixIcon: preIcon,
         enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(
                 color:

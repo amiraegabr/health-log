@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:healthlog/screens/reminders/calender.dart';
 import 'package:healthlog/ui_components/medication_card.dart';
 
 
@@ -41,7 +40,7 @@ class _MedicationsPageState extends State<MedicationsPage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(15),
+      padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           const SizedBox(height: 10),
@@ -60,70 +59,3 @@ class _MedicationsPageState extends State<MedicationsPage> {
     );
   }
 }
-
-
-
-
-
-// Container(
-//   decoration: BoxDecoration(
-//     borderRadius: BorderRadius.circular(20),
-//     color: const Color.fromRGBO(177, 221, 213, 1),
-//   ),
-//   child: Padding(
-//     padding: const EdgeInsets.all(25.0),
-//     child: SingleChildScrollView(
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           const Text(
-//             'Medications for today:',
-//             style: TextStyle(fontSize: 20),
-//           ),
-//           CheckboxListTile(
-//               controlAffinity:
-//               ListTileControlAffinity.leading,
-//               checkColor: const Color(0xFF129A7F),
-//               title: const Text(
-//                 'Vitamin D',
-//                 style: TextStyle(fontSize: 20),
-//               ),
-//               value: status,
-//               onChanged: (val) {
-//                 setState(() {
-//                   status = val!;
-//                 });
-//               }),
-//           CheckboxListTile(
-//               controlAffinity:
-//               ListTileControlAffinity.leading,
-//               checkColor: const Color(0xFF129A7F),
-//               title: const Text(
-//                 'Vitamin D',
-//                 style: TextStyle(fontSize: 20),
-//               ),
-//               value: status,
-//               onChanged: (val) {
-//                 setState(() {
-//                   status = val!;
-//                 });
-//               }),
-//           CheckboxListTile(
-//               controlAffinity:
-//               ListTileControlAffinity.leading,
-//               checkColor: const Color(0xFF129A7F),
-//               title: const Text(
-//                 'Vitamin D',
-//                 style: TextStyle(fontSize: 20),
-//               ),
-//               value: status,
-//               onChanged: (val) {
-//                 setState(() {
-//                   status = val!;
-//                 });
-//               }),
-//         ],
-//       ),
-//     ),
-//   ),
-// ),

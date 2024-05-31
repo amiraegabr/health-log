@@ -36,15 +36,17 @@ class _AddNewMedicationState extends State<AddNewMedication> {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     final userID = FirebaseAuth.instance.currentUser!.uid;
 
-    await firestore.collection('users').doc(userID).collection('medications').add({
+    await firestore
+        .collection('users')
+        .doc(userID)
+        .collection('medications')
+        .add({
       'name': name.text,
       'type': medType,
       'frequency_days': _selectedDays,
       'frequency_times': _selectedTimes,
       // 'reminder_date': _selectedDate,
-
     });
-
   }
 
   @override
@@ -486,7 +488,8 @@ class _AddNewMedicationState extends State<AddNewMedication> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const Reminders()));
+                                      builder: (context) =>
+                                          Reminders(initialTabIndex: 0)));
                             },
                             child: const Text(
                               "Continue",

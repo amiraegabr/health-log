@@ -1,8 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthlog/firebase_options.dart';
-import 'package:healthlog/screens/registrationScreens/profile_setup.dart';
+import 'package:healthlog/providers/selected_symptom_provider.dart';
 import 'package:healthlog/screens/splash.dart';
+import 'package:provider/provider.dart';
 import 'themes.dart';
 
 
@@ -12,7 +13,8 @@ Future<void> _initFirebase() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 }
-void main() async{
+
+void main() async {
   // firebase initialization
   await _initFirebase();
   runApp(const App());
@@ -24,11 +26,14 @@ class App extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
-      title: "Health log",
-      home:  const SplashScreen(),
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => SelectedSymptomsProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        title: "Health log",
+        home: const SplashScreen(),
+      ),
     );
   }
 }

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import '../ui_components/profile_cards.dart';
 import 'profileScreens/doctors.dart';
 import 'profileScreens/insurances.dart';
-import 'profileScreens/medical_id.dart';
-import 'profileScreens/medical_records.dart';
+import 'profileScreens/medical_files.dart';
 import 'profileScreens/medications.dart';
 import 'profileScreens/notes.dart';
 
@@ -34,13 +33,13 @@ class ProfilePage extends StatelessWidget {
               const SizedBox(height: 15,),
               InkWell(
                 onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                      const MedicalID(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) =>
+                  //     MedicalID(),
+                  //   ),
+                  // );
                 },
                 child: const ProfileCards(
                   leading: Icon(Icons.person, size: 36,),
@@ -50,13 +49,13 @@ class ProfilePage extends StatelessWidget {
               ),
               InkWell(
                 onTap: (){
-                  // Navigator.push(
-                    // context,
-                    // MaterialPageRoute(
-                    //   builder: (context) =>
-                    //   // const Insurances(),
-                    // ),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                      const Insurances(),
+                    ),
+                  );
                 },
                 child: const ProfileCards(
                   leading: Icon(Icons.verified_user_rounded,size: 36,),
@@ -70,7 +69,7 @@ class ProfilePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                      const MedicalRecords(),
+                      MedicalRecords(),
                     ),
                   );
                 },
