@@ -42,13 +42,20 @@ class _AddNewAppointmentState extends State<AddNewAppointment> {
       final String userId = user.uid;
 
       await firestore.collection('users').doc(userId).collection('doctors').add({
-        'doc name': docNameController.text,
+        'doc_name': docNameController.text,
         'specialization': specializationController.text,
         'location': locationController.text,
         'phone': phoneController.text,
       });
 
-      await firestore.collection('users').doc(userId).collection('appointments').add({});
+      await firestore.collection('users').doc(userId).collection('appointments').add({
+        'doc_name': docNameController.text,
+        'specialization': specializationController.text,
+        'location': locationController.text,
+        'phone': phoneController.text,
+        'date': date,
+        'time': time,
+      });
     }
   }
 

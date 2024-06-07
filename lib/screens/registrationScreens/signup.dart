@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:healthlog/screens/registrationScreens/profile_setup.dart';
+// import 'package:healthlog/screens/registrationScreens/profile_setup.dart';
 import 'package:healthlog/ui_components/navigation_bar.dart';
 import '../../ui_components/registration_button.dart';
 import '../../ui_components/registration_input.dart';
@@ -29,6 +29,7 @@ class _SignUpState extends State<SignUp> {
   final lastName = TextEditingController();
 
   //dispose of input
+  @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
@@ -39,7 +40,7 @@ class _SignUpState extends State<SignUp> {
   }
 
   //sign user in
-  void SignUserUp() async {
+  void signUserUp() async {
     //loading circle
     showDialog(
         context: context,
@@ -52,7 +53,7 @@ class _SignUpState extends State<SignUp> {
     //check password match
     if (passwordController.text != confirmedPasswordController.text) {
       Navigator.pop(context);
-      PassErrorMessage();
+      passErrorMessage();
     } else {
       //passwords match
       try {
@@ -70,7 +71,7 @@ class _SignUpState extends State<SignUp> {
             MaterialPageRoute(builder: (context) => const AppNavigation()));
       } on FirebaseAuthException catch (e) {
         if (e.code == "email-already-in-use") {
-          SignedErrorMessage();
+          signedErrorMessage();
           Navigator.pop(context);
           Navigator.push(
             context,
@@ -82,23 +83,20 @@ class _SignUpState extends State<SignUp> {
       }
     }
   }
-
-  void PassErrorMessage() => showDialog(
+  void passErrorMessage() => showDialog(
       context: context,
       builder: (context) => const AlertDialog(
-            title: Text("passwords dont match"),
+            title: Text("passwords don't match"),
           ));
-
-  void SignedErrorMessage() => showDialog(
+  void signedErrorMessage() => showDialog(
       context: context,
       builder: (context) => const AlertDialog(
             title: Text("You already have an account \n Try signing in"),
           ));
-
-  void EmptyErrorMessage() => showDialog(
+  void emptyErrorMessage() => showDialog(
       context: context,
       builder: (context) => const AlertDialog(
-            title: Text("Please fill in all feilds to continue"),
+            title: Text("Please fill in all fields to continue"),
           ));
 
   @override
@@ -202,7 +200,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       RegistrationButton(
                         label: "SIGN UP",
-                        onTap: SignUserUp,
+                        onTap: signUserUp,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
