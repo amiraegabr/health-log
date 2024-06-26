@@ -30,9 +30,12 @@ Health log mobile application is  a Flutter-based mobile application designed to
 The symptom diagnosis feature uses a Python machine learning model trained on a dataset of symptoms, description for each and corresponding diagnoses. 
 
 ## Model Details
-* Model type: 
-* Training dataset: 
-* Accuracy:
+* Model type: Random Forest
+* Training datasets:
+  1. Symptom_Description: Diseases description 
+  2. Symptom_precaution: suggestions to be done in case of each diagnosis
+  3. Symptom-Severity: Every symptom and its weight
+* Accuracy: 99.187%
 
 ## Getting Started
 To run the app, follow these steps:
