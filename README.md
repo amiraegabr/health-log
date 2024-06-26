@@ -18,7 +18,7 @@ Health log mobile application is  a Flutter-based mobile application designed to
   (https://github.com/joe655), (https://eg.linkedin.com/in/yousef-mohamed0) 
 * [Rawan Ahmed] -Developer
   (https://github.com/rawannahmedd),(http://www.linkedin.com/in/rawann-ahmeed)
-* [Assem Kandil]
+* [Assem Kandil] -Developer
   (https://github.com/assemkandil),(https://www.linkedin.com/in/asem-kandil-842a27242)
 
 ## Technologies Used
@@ -32,19 +32,22 @@ The symptom diagnosis feature uses a Python machine learning model trained on a 
 ## Model Details
 * Model type: Random Forest
 * Training datasets:
-  1. Symptom_Description: Diseases description 
-  2. Symptom_precaution: suggestions to be done in case of each diagnosis
-  3. Symptom-Severity: Every symptom and its weight
+  1. Each disease and its symptoms 
+  2. Symptom_Description: Diseases description 
+  3. Symptom_precaution: suggestions to be done in case of each diagnosis
+  4. Symptom-Severity: Every symptom and its weight
 * Accuracy: 99.187%
 
 ## Getting Started
-To run the app, follow these steps:
+First run ML model:
+1. Open preffered python IDE (eg.pycharm)
+2. Open ml model file
+3. Run "uvicorn main:app —reload" in the terminal
+
+Then to run the app:
 1. Clone the repository: `git clone https://github.com/amiraegabr/healthlog.git`
 2. Open the project in your preferred IDE (e.g., Android Studio, Visual Studio Code)
 3. Run the app on an emulator or physical device
-
-To run ML model:
-
 
 ## Version
 Current version: 1.0
