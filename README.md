@@ -11,15 +11,15 @@ Health log mobile application is  a Flutter-based mobile application designed to
 
 ## Team Members
 * [Amira E Gabr]   - Team Lead, Designer, Developer
-  (https://github.com/amiraegabr),(https://www.linkedin.com/in/amiraegabr)
+  (https://github.com/amiraegabr) , (https://www.linkedin.com/in/amiraegabr)
 * [Fatma Mostafa]  - Developer
-  (https://github.com/fatmasalem277),(https://linkedin.com/in/fatma-mostafa-744135218)
+  (https://github.com/fatmasalem277) , (https://linkedin.com/in/fatma-mostafa-744135218)
 * [Yousef Mohamed] - Developer
-  (https://github.com/joe655), (https://eg.linkedin.com/in/yousef-mohamed0) 
+  (https://github.com/joe655) , (https://eg.linkedin.com/in/yousef-mohamed0) 
 * [Rawan Ahmed] -Developer
-  (https://github.com/rawannahmedd),(http://www.linkedin.com/in/rawann-ahmeed)
+  (https://github.com/rawannahmedd) , (http://www.linkedin.com/in/rawann-ahmeed)
 * [Assem Kandil] -Developer
-  (https://github.com/assemkandil),(https://www.linkedin.com/in/asem-kandil-842a27242)
+  (https://github.com/assemkandil) , (https://www.linkedin.com/in/asem-kandil-842a27242)
 
 ## Technologies Used
 * Flutter & Dart
